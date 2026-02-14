@@ -1,0 +1,16 @@
+{
+	"name": "Ubuntu",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"features": {
+        "ghcr.io/devcontainers/features/node:1": {}
+	},
+	"remoteUser": "vscode",
+	"mounts": [
+		"source=${devcontainerId}-claude-code-config,target=/home/vscode/.claude,type=volume",
+		"source=${devcontainerId}-node-modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
+	],
+	"postCreateCommand": ".devcontainer/post-create.sh",
+	"waitFor": "postCreateCommand"
+}
