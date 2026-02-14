@@ -1,18 +1,10 @@
 #!/bin/bash
 
-# 使用法: ./scripts/coding.sh lp
-TARGET=$1
-
-if [ -z "$TARGET" ]; then
-  echo "Error: Benchmark target name is required (e.g., lp)"
-  exit 1
-fi
-
-BM_PATH="benchmarks/$TARGET"
+BM_PATH="work"
 
 # generated フォルダが存在するかチェック
 if [ ! -d "$BM_PATH/generated" ]; then
-  echo "Error: $BM_PATH/generated does not exist. Please generate code first."
+  echo "Error: $BM_PATH/generated does not exist."
   exit 1
 fi
 
