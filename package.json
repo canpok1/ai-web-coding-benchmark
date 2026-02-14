@@ -4,7 +4,8 @@
   "scripts": {
     "setup": "npx playwright install --with-deps chromium",
     "dev": "vite --host 0.0.0.0",
-    "capture": "node scripts/capture-reference.js"
+    "capture": "node scripts/capture-reference.js",
+    "web-diff": "bash scripts/web-diff.sh"
   },
   "devDependencies": {
     "@playwright/test": "^1.58.2",

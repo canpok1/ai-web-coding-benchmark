@@ -1,0 +1,1 @@
+reference.pngと同じ見た目のWebページをgenerated/index.htmlに作成してください。
