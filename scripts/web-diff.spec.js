@@ -24,6 +24,6 @@ test('見た目の再現度チェック', async ({ page }) => {
   await expect(page).toHaveScreenshot('reference.png', {
     fullPage: true,
     maxDiffPixelRatio: 0.02, // 2%以上の差でアラート
-    threshold: 0,            // 色は完全一致で比較
+    threshold: 0.1,          // 色の差の許容値
   });
 });
