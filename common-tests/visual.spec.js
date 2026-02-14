@@ -1,5 +1,4 @@
 import { test, expect } from '@playwright/test';
-import path from 'path';
 
 test('見た目の再現度チェック', async ({ page }) => {
   // スクリプトから渡された比較対象のURLへ移動
@@ -16,8 +15,5 @@ test('見た目の再現度チェック', async ({ page }) => {
   await page.waitForLoadState('networkidle');
 
   // benchmarks/xx/reference.png と現在の画面を比較
-  await expect(page).toHaveScreenshot('reference.png', {
-    // 比較元となる画像の絶対パスを指定
-    path: path.join(bmDir, 'reference.png'),
-  });
+  await expect(page).toHaveScreenshot('reference.png');
 });

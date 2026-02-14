@@ -1,10 +1,11 @@
 import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
+  snapshotPathTemplate: `${process.env.TARGET_BM_DIR}/{arg}{ext}`,
   testDir: './common-tests',
   fullyParallel: false, // 1つずつ確実に検証
   retries: 0,
-  reporter: 'html', // 詳細な比較レポートを生成
+  reporter: 'list',
   use: {
     baseURL: process.env.TARGET_URL || 'http://localhost:5173',
     trace: 'on-first-retry',
