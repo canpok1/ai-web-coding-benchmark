@@ -2,9 +2,12 @@
   "name": "ai-web-coding-benchmark",
   "version": "0.0.1",
   "scripts": {
-    "dev": "vite --host 0.0.0.0"
+    "setup": "npx playwright install --with-deps chromium",
+    "dev": "vite --host 0.0.0.0",
+    "capture": "node scripts/capture-reference.js"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.2",
     "vite": "^7.3.1"
   }
 }

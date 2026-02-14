@@ -17,3 +17,8 @@ Claude Code で Web ページを生成する検証を行うためのリポジト
 3. 別のターミナルで、開発サーバーを起動する。
     - `npm run dev`
 4. ブラウザで http://localhost:5173 にアクセスして結果を確認してください。
+
+## その他操作
+
+- 参考用のスクリーンショットを撮る場合は、`npm run capture -- <URL> <保存先ディレクトリ>` を実行してください。
+    - `scripts/capture-reference.js` が実行され、スクリーンショットが `reference.png` として保存されます。
