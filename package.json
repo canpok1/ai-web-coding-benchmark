@@ -1,0 +1,10 @@
+{
+  "name": "ai-web-coding-benchmark",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0"
+  },
+  "devDependencies": {
+    "vite": "^7.3.1"
+  }
+}
