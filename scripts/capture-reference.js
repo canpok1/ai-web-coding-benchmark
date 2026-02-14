@@ -1,17 +1,22 @@
 // scripts/capture-reference.js
-// 使用法: node scripts/capture-reference.js <URL>
+// 使用法: node scripts/capture-reference.js <URL or FilePath>
 // 例: node scripts/capture-reference.js https://example.com
+// 例: node scripts/capture-reference.js ./work/generated/index.html
 
 const { chromium } = require('playwright');
 const path = require('path');
 const fs = require('fs');
 
-const url = process.argv[2];
+const input = process.argv[2];
 
-if (!url) {
-  console.error('Usage: node scripts/capture-reference.js <URL>');
+if (!input) {
+  console.error('Usage: node scripts/capture-reference.js <URL or FilePath>');
   process.exit(1);
 }
+
+const url = /^https?:\/\//.test(input)
+  ? input
+  : 'file://' + path.resolve(process.cwd(), input);
 
 (async () => {
   const browser = await chromium.launch();

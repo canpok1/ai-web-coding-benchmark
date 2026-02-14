@@ -20,5 +20,6 @@ Claude Code で Web ページを生成する検証を行うためのリポジト
 
 ## その他操作
 
-- 参考用のスクリーンショットを撮る場合は、`npm run capture -- <URL>` を実行してください。
+- 参考用のスクリーンショットを撮る場合は、`npm run capture -- <URL or FilePath>` を実行してください。
     - `scripts/capture-reference.js` が実行され、スクリーンショットが `work/reference.png` として保存されます。
+    - URL の代わりにローカルファイルパスも指定できます: `npm run capture -- ./work/generated/index.html`
