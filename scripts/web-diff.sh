@@ -23,7 +23,7 @@ export TARGET_BM_DIR="$(pwd)/$BM_PATH"
 export TARGET_URL="http://localhost:5173/benchmarks/$TARGET/generated/index.html"
 
 # Playwright実行（共通テストを利用）
-npx playwright test common-tests/visual.spec.js --output="$(pwd)/$BM_PATH/results"
+npx playwright test ./web-diff.spec.js --output="$(pwd)/$BM_PATH/results"
 
 echo "✅ Comparison complete."
 echo "View report: npx playwright show-report"

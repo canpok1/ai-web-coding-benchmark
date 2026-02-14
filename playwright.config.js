@@ -2,7 +2,6 @@ import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
   snapshotPathTemplate: `${process.env.TARGET_BM_DIR}/{arg}{ext}`,
-  testDir: './common-tests',
   fullyParallel: false, // 1つずつ確実に検証
   retries: 0,
   reporter: 'list',
