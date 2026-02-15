@@ -1,175 +1,383 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <title>模写学習用見本サイト（ダミーテキスト版）</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
-    
-    body { 
-      font-family: 'Noto Sans JP', sans-serif; 
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice: High-End SaaS Landing Page (No Images)</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+        }
 
-    /* ヒーローエリアの背景グラデーション */
-    .hero-bg {
-      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-    }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    /* カードのホバーアニメーション */
-    .feature-card {
-      transition: all 0.3s ease;
-    }
-    .feature-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-    }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-    /* CSSだけで作る簡易アイコン用の図形 */
-    .icon-box {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 64px;
-      height: 64px;
-      border-radius: 16px;
-      background-color: #ecfdf5;
-      color: #059669;
-      font-weight: bold;
-      font-size: 20px;
-      margin: 0 auto 24px;
-    }
-  </style>
+        /* ナビゲーション */
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 80px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-mark {
+            width: 32px;
+            height: 32px;
+            background: var(--accent-gradient);
+            border-radius: 8px;
+            transform: rotate(-10deg);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        /* ヒーローセクション */
+        .hero {
+            padding: 180px 80px 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-badge {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .hero-title {
+            font-size: 72px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            max-width: 900px;
+        }
+
+        .hero-desc {
+            color: var(--text-dim);
+            font-size: 20px;
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        /* CSSのみで作る製品プレビュー */
+        .product-preview {
+            width: 1000px;
+            height: 500px;
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            margin-top: 40px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+            padding: 20px;
+            overflow: hidden;
+            transform: perspective(1000px) rotateX(5deg);
+        }
+
+        .preview-sidebar {
+            width: 60px;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 15px 0;
+            align-items: center;
+        }
+
+        .preview-dot {
+            width: 24px;
+            height: 24px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 6px;
+        }
+
+        .preview-main {
+            position: absolute;
+            left: 100px;
+            top: 40px;
+            right: 40px;
+            bottom: 40px;
+        }
+
+        .preview-chart-row {
+            display: flex;
+            gap: 20px;
+            height: 100%;
+        }
+
+        .preview-bar {
+            flex: 1;
+            background: var(--accent-gradient);
+            border-radius: 4px;
+            opacity: 0.6;
+        }
+
+        /* 特徴セクション */
+        .features {
+            padding: 120px 80px;
+            background: white;
+            color: #0f172a;
+            clip-path: polygon(0 5%, 100% 0, 100% 95%, 0 100%);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            padding: 40px;
+            border-radius: 24px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* CSSで作るチェックアイコン */
+        .icon-check {
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            border-radius: 12px;
+            margin-bottom: 24px;
+            position: relative;
+        }
+        .icon-check::after {
+            content: "";
+            position: absolute;
+            width: 16px;
+            height: 8px;
+            border-left: 3px solid white;
+            border-bottom: 3px solid white;
+            top: 16px;
+            left: 14px;
+            transform: rotate(-45deg);
+        }
+
+        /* 価格セクション */
+        .pricing {
+            padding: 150px 80px;
+            text-align: center;
+        }
+
+        .price-card {
+            max-width: 400px;
+            margin: 60px auto 0;
+            background: var(--bg-card);
+            border: 1px solid var(--primary);
+            padding: 60px;
+            border-radius: 32px;
+            position: relative;
+        }
+
+        .price-card::before {
+            content: "POPULAR";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            padding: 4px 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 32px;
+            width: 100%;
+        }
+
+        /* フッター */
+        .footer {
+            padding: 80px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 1024px) {
+            .hero-title { font-size: 48px; }
+            .product-preview { width: 100%; height: 350px; }
+            .feature-grid { grid-template-columns: 1fr; }
+            .nav { padding: 20px 40px; }
+            .hero { padding: 140px 40px 80px; }
+        }
+    </style>
 </head>
-<body class="bg-white text-slate-800 antialiased">
+<body>
 
-  <!-- ヘッダーナビゲーション -->
-  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-sm border-b border-slate-100">
-    <div class="max-w-7xl mx-auto flex justify-between items-center px-6 md:px-12 py-5">
-      <!-- ロゴ部分：架空のブランド名 -->
-      <div class="text-2xl font-black tracking-tighter text-slate-900 uppercase">
-        Sample<span class="text-emerald-600">Life</span>
-      </div>
-      
-      <!-- ナビゲーションメニュー -->
-      <nav class="hidden md:flex space-x-8 text-sm font-bold text-slate-500 tracking-widest">
-        <a href="#" class="hover:text-emerald-600 transition-colors">メインメニュー</a>
-        <a href="#" class="hover:text-emerald-600 transition-colors">サービス概要</a>
-        <a href="#" class="hover:text-emerald-600 transition-colors">よくある質問</a>
-      </nav>
-
-      <!-- モバイル用メニューアイコン（CSS図形） -->
-      <button class="md:hidden flex flex-col space-y-1.5 p-2" aria-label="メニューを開く">
-        <span class="w-6 h-0.5 bg-slate-800"></span>
-        <span class="w-6 h-0.5 bg-slate-800"></span>
-        <span class="w-6 h-0.5 bg-slate-800"></span>
-      </button>
+    <div class="nav">
+        <div class="logo-box">
+            <div class="logo-mark"></div>
+            <p class="p-text" style="font-weight: 800; font-size: 20px; letter-spacing: -1px;">CORE.AI</p>
+        </div>
+        <div class="nav-links">
+            <p class="p-text">Features</p>
+            <p class="p-text">Solutions</p>
+            <p class="p-text">Pricing</p>
+        </div>
+        <div style="background: white; color: black; padding: 10px 24px; border-radius: 10px; font-weight: 600;">
+            <p class="p-text">Get Started</p>
+        </div>
     </div>
-  </header>
 
-  <main>
-    <!-- ヒーローセクション -->
-    <section class="hero-bg px-6 md:px-12 py-20 lg:py-32 flex flex-col items-center text-center">
-      <div class="max-w-3xl">
-        <span class="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-widest text-emerald-700 bg-emerald-100 rounded-full">
-          ここはラベルテキストの表示エリアです
-        </span>
-        <h1 class="text-4xl md:text-6xl font-black leading-tight mb-8 tracking-tight text-slate-900">
-          ここにサイトの核心となる<br class="hidden sm:block">
-          メインの見出しが入ります。
-        </h1>
-        <p class="text-base md:text-lg text-slate-600 mb-10 max-w-xl mx-auto leading-relaxed">
-          この文章はレイアウトを確認するためのサンプルです。実際の制作ではここにブランドの理念や、ユーザーに最も伝えたいメッセージを2〜3行程度で記述します。
-        </p>
-        <div class="flex flex-col sm:flex-row justify-center gap-4">
-          <button class="bg-slate-900 text-white px-10 py-4 rounded-xl font-bold hover:bg-slate-800 transition-all shadow-lg active:scale-95">
-            主要なアクションボタン
-          </button>
-          <button class="bg-white text-slate-900 border border-slate-200 px-10 py-4 rounded-xl font-bold hover:bg-slate-50 transition-all active:scale-95">
-            補足的なボタン
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- 特徴紹介セクション -->
-    <section class="px-6 md:px-12 py-24 bg-white">
-      <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl font-bold mb-4">このサービスが選ばれる理由</h2>
-          <div class="w-12 h-1 bg-emerald-500 mx-auto rounded-full"></div>
-        </div>
+    <div class="hero">
+        <div class="hero-badge">v2.0 is now available</div>
+        <div class="hero-title">Beautiful analytics for modern teams</div>
+        <div class="hero-desc">Scale your business faster with real-time insights. No complex setup, no unnecessary features. Just the data you need.</div>
         
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <!-- 特徴1: 円形図形 -->
-          <div class="feature-card bg-slate-50 p-10 rounded-3xl border border-slate-100 text-center">
-            <div class="icon-box">
-              <div class="w-6 h-6 border-4 border-emerald-600 rounded-full"></div>
+        <div style="display: flex; gap: 20px;">
+            <div style="background: var(--primary); padding: 18px 36px; border-radius: 12px; font-weight: 600;">
+                <p class="p-text">Start Free Trial</p>
             </div>
-            <h3 class="text-xl font-bold mb-4">項目の見出し A</h3>
-            <p class="text-slate-500 text-sm leading-relaxed">
-              ここには特徴の具体的な説明文が入ります。テキストの分量はこの程度が一般的です。文章の長さに合わせた余白の変化を確認してください。
-            </p>
-          </div>
-
-          <!-- 特徴2: テキストアイコン -->
-          <div class="feature-card bg-slate-50 p-10 rounded-3xl border border-slate-100 text-center">
-            <div class="icon-box">
-              <span class="leading-none mt-1">図</span>
+            <div style="background: rgba(255,255,255,0.05); padding: 18px 36px; border-radius: 12px; font-weight: 600; border: 1px solid rgba(255,255,255,0.1);">
+                <p class="p-text">View Demo</p>
             </div>
-            <h3 class="text-xl font-bold mb-4">項目の見出し B</h3>
-            <p class="text-slate-500 text-sm leading-relaxed">
-              2番目の特徴をここに記述します。すべてのカードでテキストの行数を揃えると、より整った印象のレイアウトになります。
-            </p>
-          </div>
-
-          <!-- 特徴3: 菱形図形 -->
-          <div class="feature-card bg-slate-50 p-10 rounded-3xl border border-slate-100 text-center">
-            <div class="icon-box">
-              <div class="w-6 h-6 border-4 border-emerald-600 rotate-45"></div>
-            </div>
-            <h3 class="text-xl font-bold mb-4">項目の見出し C</h3>
-            <p class="text-slate-500 text-sm leading-relaxed">
-              3つ目のポイントです。画面幅を狭めたときに、これらのカードがどのように縦並びに変化するかをチェックしながら模写しましょう。
-            </p>
-          </div>
         </div>
-      </div>
-    </section>
 
-    <!-- 登録・コンバージョンセクション -->
-    <section class="px-6 py-20 bg-slate-900 text-white text-center">
-      <div class="max-w-2xl mx-auto">
-        <h2 class="text-3xl font-bold mb-4">ここに最後の呼びかけ</h2>
-        <p class="text-slate-400 mb-8">
-          登録やお問い合わせを促すセクションです。ユーザーに次に取ってほしい行動を、簡潔で分かりやすい日本語で伝えます。
-        </p>
-        <div class="flex flex-col sm:flex-row gap-3">
-          <input type="text" placeholder="サンプル入力欄" class="flex-grow px-6 py-4 rounded-xl bg-slate-800 border-none text-white focus:ring-2 focus:ring-emerald-500 outline-none">
-          <button class="bg-emerald-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-emerald-500 transition-colors whitespace-nowrap">
-            送信ボタン
-          </button>
+        <!-- 画像なしの製品プレビュー描画 -->
+        <div class="product-preview">
+            <div class="preview-sidebar">
+                <div class="preview-dot" style="background: var(--primary);"></div>
+                <div class="preview-dot"></div>
+                <div class="preview-dot"></div>
+                <div class="preview-dot"></div>
+            </div>
+            <div class="preview-main">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 30px;">
+                    <div style="width: 200px; height: 20px; background: rgba(255,255,255,0.1); border-radius: 4px;"></div>
+                    <div style="width: 100px; height: 20px; background: rgba(255,255,255,0.05); border-radius: 4px;"></div>
+                </div>
+                <div class="preview-chart-row">
+                    <div class="preview-bar" style="height: 40%;"></div>
+                    <div class="preview-bar" style="height: 70%;"></div>
+                    <div class="preview-bar" style="height: 50%;"></div>
+                    <div class="preview-bar" style="height: 90%;"></div>
+                    <div class="preview-bar" style="height: 60%;"></div>
+                    <div class="preview-bar" style="height: 85%;"></div>
+                    <div class="preview-bar" style="height: 45%;"></div>
+                    <div class="preview-bar" style="height: 75%;"></div>
+                </div>
+            </div>
         </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- フッター -->
-  <footer class="max-w-7xl mx-auto px-6 md:px-12 py-12 border-t border-slate-100">
-    <div class="flex flex-col md:flex-row justify-between items-center gap-8">
-      <div class="text-center md:text-left">
-        <div class="text-xl font-black mb-2 uppercase">Sample<span class="text-emerald-600">Life</span></div>
-        <div class="text-xs text-slate-400 tracking-widest">© 2026 ここに著作権情報が入ります。</div>
-      </div>
-      
-      <div class="flex space-x-8 text-xs font-bold tracking-widest text-slate-400 uppercase">
-        <a href="#" class="hover:text-emerald-600 transition-colors">フッターリンク</a>
-        <a href="#" class="hover:text-emerald-600 transition-colors">利用規約</a>
-        <a href="#" class="hover:text-emerald-600 transition-colors">個人情報保護</a>
-      </div>
     </div>
-  </footer>
+
+    <div class="features">
+        <div class="section-header">
+            <p style="color: var(--primary); font-weight: 700; margin-bottom: 16px;">FEATURES</p>
+            <div style="font-size: 40px; font-weight: 800; letter-spacing: -1px;">Everything you need to grow</div>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="icon-check"></div>
+                <p style="font-size: 20px; font-weight: 700; margin-bottom: 12px;">Real-time Data</p>
+                <p style="color: #64748b;">Get updates as they happen. Our ultra-low latency pipeline ensures you're never behind.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-check" style="background: #a855f7;"></div>
+                <p style="font-size: 20px; font-weight: 700; margin-bottom: 12px;">Advanced AI</p>
+                <p style="color: #64748b;">Predictive modeling built-in. Forecast your revenue with 99% accuracy using our engine.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-check" style="background: #ec4899;"></div>
+                <p style="font-size: 20px; font-weight: 700; margin-bottom: 12px;">Global Edge</p>
+                <p style="color: #64748b;">Fast access from anywhere in the world. Our nodes are strategically placed globally.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="pricing">
+        <div class="section-header">
+            <div style="font-size: 40px; font-weight: 800; letter-spacing: -1px;">Simple, transparent pricing</div>
+            <p style="color: var(--text-dim); margin-top: 16px;">Choose the plan that's right for your business.</p>
+        </div>
+
+        <div class="price-card">
+            <p class="p-small">PROFESSIONAL</p>
+            <div style="font-size: 56px; font-weight: 800; margin: 24px 0;">$49<span style="font-size: 20px; color: var(--text-dim); font-weight: 400;">/mo</span></div>
+            <div style="text-align: left; display: flex; flex-direction: column; gap: 16px;">
+                <p class="p-text">✓ Unlimited projects</p>
+                <p class="p-text">✓ 24/7 Priority support</p>
+                <p class="p-text">✓ Advanced custom reports</p>
+                <p class="p-text">✓ API Access</p>
+            </div>
+            <div class="btn-primary">
+                <p class="p-text">Get Started Today</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="logo-box">
+            <div class="logo-mark" style="width: 24px; height: 24px;"></div>
+            <p class="p-text" style="font-weight: bold; color: white;">CORE.AI</p>
+        </div>
+        <div style="display: flex; gap: 40px;">
+            <p class="p-small">© 2024 CORE.AI Inc.</p>
+            <p class="p-small">Privacy Policy</p>
+            <p class="p-small">Terms of Service</p>
+        </div>
+    </div>
 
 </body>
 </html>
