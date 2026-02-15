@@ -5,7 +5,7 @@
     "setup": "npx playwright install --with-deps chromium",
     "dev": "vite --host 0.0.0.0",
     "capture": "node scripts/capture-reference.js",
-    "coding": "./scripts/coding.sh",
+    "coding": "./scripts/coding.sh scripts/coding-prompt.md",
     "web-diff": "./scripts/web-diff.sh"
   },
   "devDependencies": {
