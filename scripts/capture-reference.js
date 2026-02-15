@@ -7,6 +7,12 @@ const { chromium } = require('playwright');
 const path = require('path');
 const fs = require('fs');
 
+const VIEWPORTS = [
+  { name: 'desktop', width: 1280, height: 800 },
+  { name: 'tablet', width: 768, height: 1024 },
+  { name: 'mobile', width: 375, height: 667 },
+];
+
 const input = process.argv[2];
 
 if (!input) {
@@ -20,13 +26,7 @@ const url = /^https?:\/\//.test(input)
 
 (async () => {
   const browser = await chromium.launch();
-  const page = await browser.newPage({
-    viewport: { width: 1280, height: 800 }
-  });
-
-  // 保存先を benchmark/ に固定
   const absoluteDir = path.resolve(process.cwd(), 'work');
-  const savePath = path.join(absoluteDir, 'reference.png');
 
   console.log(`Capturing ${url}...`);
 
@@ -36,12 +36,18 @@ const url = /^https?:\/\//.test(input)
       fs.mkdirSync(absoluteDir, { recursive: true });
     }
 
-    await page.goto(url, { waitUntil: 'networkidle' });
+    for (const vp of VIEWPORTS) {
+      const page = await browser.newPage({
+        viewport: { width: vp.width, height: vp.height }
+      });
+      await page.goto(url, { waitUntil: 'networkidle' });
+      const savePath = path.join(absoluteDir, `reference-${vp.name}.png`);
+      await page.screenshot({ path: savePath, fullPage: true });
+      console.log(`  Saved: ${savePath} (${vp.width}x${vp.height})`);
+      await page.close();
+    }
 
-    // フルページ撮影
-    await page.screenshot({ path: savePath, fullPage: true });
-
-    console.log(`Success! Reference saved to: ${savePath}`);
+    console.log('Success! All reference images saved.');
   } catch (error) {
     console.error(`Failed: ${error.message}`);
   } finally {
