@@ -6,6 +6,7 @@
     "dev": "vite --host 0.0.0.0",
     "capture": "node scripts/capture-reference.js",
     "coding": "./scripts/coding.sh scripts/coding-prompt.md",
+    "coding-team": "./scripts/coding.sh scripts/coding-team-prompt.md",
     "web-diff": "./scripts/web-diff.sh"
   },
   "devDependencies": {
